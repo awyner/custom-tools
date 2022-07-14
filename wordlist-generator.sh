@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Modified from PinkDraconian's ctf-bash-tools repo, added functionality for specifiying output file
+# Original script https://github.com/PinkDraconian/CTF-bash-tools
 #
 # Gets a list with `firstname lastname` and formats them into the following:
 # 	NameSurname, Name.Surname, NamSur (3letters of each), Nam.Sur, NSurname, N.Surname, SurnameName, Surname.Name, SurnameN, Surname.N,
