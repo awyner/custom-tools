@@ -6,7 +6,7 @@
 #
 
 if [[ $ == "-h" || $# != 2 ]]; then
-	echo "Usage: ctf-wordlist-names names-file output-filename"
+	echo "Usage: wordlist-generator names-file output-filename"
 	exit
 fi
 
