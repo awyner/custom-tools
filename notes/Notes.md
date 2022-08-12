@@ -22,3 +22,5 @@
 * neo4j-community-4.4.8                  
 * gobuster-darwin-amd64                       
 * nikto
+* crackmapexec (cme)
+
