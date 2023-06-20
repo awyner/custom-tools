@@ -11,7 +11,7 @@ if [[ $# == 0 ]]
 then
     ip=`curl -s http://openvpn1.issgs.net:8080 | grep '^172.' | cut -d ',' -f1 -f2 | tr ',' "\t" | sort -t- -k4 -V`
 else
-    ip=`curl -s http://openvpn1.issgs.net:8080 | grep '^172.'| grep -iw $1 | cut -d ',' -f1`
+    ip=`curl -s http://openvpn1.issgs.net:8080 | grep '^172.'| grep -iw RIVA$1 | cut -d ',' -f1`
 fi
 
 if [[ $? != 0 ]] 
