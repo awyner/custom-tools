@@ -7,4 +7,14 @@ then
     exit 1
 fi
 
-curl -s http://openvpn1.issgs.net:8080 | grep '^172.'| grep -iw $1 | cut -d ',' -f1
+ip=`curl -s http://openvpn1.issgs.net:8080 | grep '^172.'| grep -iw $1 | cut -d ',' -f1`
+
+if [[ $? != 0 ]] 
+then
+    echo 'Usage: rivaip <number>'
+elif [[ $ip ]]
+then
+    echo $ip
+else
+    echo 'RIVA '$1' is offline or does not exist'
+fi
