@@ -5,6 +5,17 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Import colorscheme from 'wal' asynchronously
+# &   # Run the process in the background.
+# ( ) # Hide shell job control messages.
+# Not supported in the "fish" shell.
+(cat ~/.cache/wal/sequences &)
+
+# Alternative (blocks terminal for 0-3ms)
+cat ~/.cache/wal/sequences
+
+# To add support for TTYs this line can be optionally added.
+source ~/.cache/wal/colors-tty.sh
 # ~/.zshrc file for zsh interactive shells.
 # see /usr/share/doc/zsh/examples/zshrc for examples
 
@@ -22,13 +33,14 @@ WORDCHARS=${WORDCHARS//\/} # Don't consider certain characters part of the word
 # hide EOL sign ('%')
 PROMPT_EOL_MARK=""
 
-# configure key keybindings
+# configure key keybindings - xev for new keybinds
 bindkey -e                                        # emacs key bindings
 bindkey ' ' magic-space                           # do history expansion on space
-bindkey '^[[3;5~' kill-word                       # ctrl + Supr
+bindkey '^[[3;5~' kill-word                       # ctrl + del
+bindkey "^H" backward-kill-word                   # ctrl + bkspc
 bindkey '^[[3~' delete-char                       # delete
-bindkey '^[[1;5C' forward-word                    # ctrl + ->
-bindkey '^[[1;5D' backward-word                   # ctrl + <-
+bindkey "^[[1;5C" forward-word                    # ctrl + ->
+bindkey "^[[1;5D" backward-word                   # ctrl + <-
 bindkey '^[[5~' beginning-of-buffer-or-history    # page up
 bindkey '^[[6~' end-of-buffer-or-history          # page down
 bindkey '^[[H' beginning-of-line                  # home
@@ -216,22 +228,15 @@ fi
 export 'Path=$PATH:~/Library/Python/3.11/bin'
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+source ~/tools/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-alias hashcat='hashcat -d 5'
-alias scopecreep='cd ~/tools/scopecreep && node index.js'
-alias scan1='ssh scanner1.issgs.net'
-alias scan2='ssh scanner2.issgs.net'
-alias scan3='ssh scanner3.issgs.net'
-alias webhelper='open -a "google chrome" ~/tools/webhelper/webhelper.html'
-alias ls='ls -G'
+alias ls='ls -G --color'
 alias ll='ls -alG'
 alias socks='ssh -q -C -N -D'
 alias cidr-to-iplist='python3 ~/tools/my-tools/cidr-to-iplist.py'
-alias rivaip='~/tools/my-tools/rivaip.sh'
 alias cputemp='sudo powermetrics -n 3 --samplers smc |grep -i "CPU die temperature"'
 alias py='python3'
 alias python='python3'
@@ -239,3 +244,16 @@ alias ga='git add'
 alias gc='git commit'
 alias gs='git status'
 alias gp='git push'
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+alias kread='keybase chat read'
+alias ksend='keybase chat send'
+
+alias vpn-join='sudo zerotier-cli join db64858fed03a926'
+alias get_idf='. /home/awyner/tools/esp/esp-idf/export.sh'
+alias esp-build='idf.py set-target esp32c6'
+alias esp-flash='idf.py -p /dev/ttyUSB0 flash'
+alias pause='sudo systemctl suspend'
+alias pair='bluetoothctl pair 14:98:77:19:1E:4F'
+alias class='cd /home/awyner/Documents/23-fall'
+alias theharvester='python3 /home/awyner/tools/theHarvester/theHarvester.py'
