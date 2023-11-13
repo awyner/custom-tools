@@ -222,11 +222,12 @@ fi
 
 # enable command-not-found if installed
 if [ -f /etc/zsh_command_not_found ]; then
-    . /etc/zsh_command_not_found
+#    . /etc/zsh_command_not_found
+    echo 'Command not found'
 fi
 
 export 'Path=$PATH:~/Library/Python/3.11/bin'
-
+export PATH="$HOME/.local/bin:$PATH"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 source ~/tools/powerlevel10k/powerlevel10k.zsh-theme
 
@@ -257,3 +258,4 @@ alias pause='sudo systemctl suspend'
 alias pair='bluetoothctl pair 14:98:77:19:1E:4F'
 alias class='cd /home/awyner/Documents/23-fall'
 alias theharvester='python3 /home/awyner/tools/theHarvester/theHarvester.py'
+alias open="xdg-open"
