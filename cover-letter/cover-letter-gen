@@ -1,0 +1,33 @@
+#!/bin/bash
+# Script to generate cover letters
+# Author: Alex Wyner
+
+today=$(date +%m/%d/%Y)
+echo $today
+read -rp "Enter company name: " comp
+read -rp "Enter file name for letter w/o file extension: " fname
+read -rp "Enter hiring manager name: " name
+read -rp "Enter role: " role
+read -rp "Enter company info: " comp_info
+read -rp "I am excited for the potential opportunity to...: " goal
+
+fname="$fname.docx"
+cp template.docx $fname
+
+dir="$(date +"%m-%d-%Y-%H-%M-%S")"
+mkdir $dir
+
+unzip $fname -d $dir
+
+cd $dir
+
+sed -i "s/DATE/$today/g" word/document.xml
+sed -i "s/COMP/$comp/g" word/document.xml
+sed -i "s/NAME/$name/g" word/document.xml
+sed -i "s/ROLE/$role/g" word/document.xml
+sed -i "s/INFO/$comp_info/g" word/document.xml
+sed -i "s/GOAL/$goal/g" word/document.xml
+
+zip -r ../$fname *
+cd ..
+
