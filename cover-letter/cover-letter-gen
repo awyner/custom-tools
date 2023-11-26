@@ -11,14 +11,17 @@ read -rp "Enter role: " role
 read -rp "Enter company info: " comp_info
 read -rp "I am excited for the potential opportunity to...: " goal
 
+if [[ ! -d $fname ]]
+then
+    mkdir $fname
+fi
+
+dir=$fname
+
 fname="$fname.docx"
 cp template.docx $fname
 
-dir="$(date +"%m-%d-%Y-%H-%M-%S")"
-mkdir $dir
-
 unzip $fname -d $dir
-
 cd $dir
 
 sed -i "s/DATE/$today/g" word/document.xml
@@ -28,6 +31,6 @@ sed -i "s/ROLE/$role/g" word/document.xml
 sed -i "s/INFO/$comp_info/g" word/document.xml
 sed -i "s/GOAL/$goal/g" word/document.xml
 
-zip -r ../$fname *
+zip -r ../letters/$fname *
 cd ..
 
