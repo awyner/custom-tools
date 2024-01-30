@@ -1,1 +1,1 @@
-Repository for custom cybersecurity or general linux tools I make along the way.
+Repository for custom tools or scripts I make along the way.
